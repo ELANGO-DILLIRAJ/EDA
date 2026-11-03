@@ -48,3 +48,8 @@ plt.title("Distribution of Daily Sales") plt.xlabel("Daily Sales (₹)") plt.yla
 # Area Chart plt.figure(figsize=(10, 5)) plt.plot(monthly_sales.index, monthly_sales.values, marker="o", linewidth=2) plt.fill_between(range(len(monthly_sales)), monthly_sales.values, alpha=0.3) 
 plt.title("Monthly Sales Area Chart") plt.xlabel("Month") plt.ylabel("Sales (₹)") plt.xticks(range(len(monthly_sales)), monthly_sales.index, rotation=45) plt.grid(True) plt.show() 
 print("\nSummary Statistics of Daily Sales:") print(data["Sales"].describe())
+
+Experiment 6: Bivariate Data Analysis Program: 
+import pandas as pd import matplotlib.pyplot as plt data = pd.read_csv("notebooks/student_performance.csv") 
+print(data) plt.figure(figsize=(6, 4)) plt.scatter(data["Hours_Studied"], data["Marks"]) 
+plt.title("Hours Studied vs Marks") plt.xlabel("Hours Studied") plt.ylabel("Marks") plt.show()
