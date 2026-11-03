@@ -30,3 +30,21 @@ Experiment 4: Data Cleaning and Preprocessing Program:
 # Load the Titanic dataset data = pd.read_csv("titanic.csv") print("Original Dataset") print(data.head()) print("\nMissing Values Before Cleaning") print(data.isnull().sum()) 
 # Fill missing values in the Age column with the mean age data["Age"] = data["Age"].fillna(data["Age"].mean()) 
 # Remove duplicate rows data = data.drop_duplicates() print("\nMissing Values After Cleaning") print(data.isnull().sum()) print("\nCleaned Dataset") print(data.head())
+
+Experiment 5: Basic Data Visualization using Matplotlib Program: 
+import pandas as pd import matplotlib.pyplot as plt data = pd.read_csv("daily_sales_2025_v2.csv") 
+data["Date"] = pd.to_datetime(data["Date"]) print("First Five Records:") print(data.head()) 
+data["Month"] = data["Date"].dt.month_name() month_order = [    "January", "February", "March", "April",    "May", "June", "July", "August",    "September", "October", "November", "December" ] 
+monthly_sales = (    data.groupby("Month")["Sales"]    .sum()    .reindex(month_order) ) 
+# Line Chart plt.figure(figsize=(10, 5)) plt.plot(monthly_sales.index, monthly_sales.values, marker="o", linewidth=2) 
+plt.title("Monthly Sales Trend") plt.xlabel("Month") plt.ylabel("Sales (₹)") plt.xticks(rotation=45) plt.grid(True) plt.show() 
+# Bar Chart plt.figure(figsize=(10, 5)) plt.bar(monthly_sales.index, monthly_sales.values)
+plt.title("Monthly Sales Comparison") plt.xlabel("Month") plt.ylabel("Sales (₹)") plt.xticks(rotation=45) plt.show() 
+# Pie Chart plt.figure(figsize=(8, 8)) plt.pie(monthly_sales.values, labels=monthly_sales.index, autopct="%1.1f%%", startangle=90) 
+plt.title("Monthly Sales Distribution") plt.show()  
+# Histogram frequency, bins, patches = plt.hist(data["Sales"], bins=15, edgecolor="black", alpha=0.6) bin_centers = (bins[:-1] + bins[1:]) / 2 
+plt.plot(bin_centers, frequency, marker="o", linewidth=2, label="Frequency Polygon") 
+plt.title("Distribution of Daily Sales") plt.xlabel("Daily Sales (₹)") plt.ylabel("Frequency") plt.grid(True) plt.legend() plt.show() 
+# Area Chart plt.figure(figsize=(10, 5)) plt.plot(monthly_sales.index, monthly_sales.values, marker="o", linewidth=2) plt.fill_between(range(len(monthly_sales)), monthly_sales.values, alpha=0.3) 
+plt.title("Monthly Sales Area Chart") plt.xlabel("Month") plt.ylabel("Sales (₹)") plt.xticks(range(len(monthly_sales)), monthly_sales.index, rotation=45) plt.grid(True) plt.show() 
+print("\nSummary Statistics of Daily Sales:") print(data["Sales"].describe())
