@@ -14,3 +14,13 @@ Experiment 2: Exploratory Data Analysis on a Real-World Dataset Program:
 # Display the total number of missing values in each column print("\nMissing Values") print(data.isnull().sum()) 
 # Display summary statistics of numerical columns print("\nSummary Statistics") print(data.describe()) 
 # Display the names of all columns print("\nColumn Names") print(data.columns)
+
+Experiment 3: Working with NumPy Arrays and Pandas DataFrames Program: 
+# Import NumPy Library import numpy as np 
+# Import Pandas library import pandas as pd 
+# Create a NumPy array numbers = np.array([10, 20, 30, 40, 50]) print("NumPy Array") print(numbers) 
+# Add 5 to each element in the array print("\nArray after adding 5") print(numbers + 5) 
+# Create a dictionary student = {    "Name": ["Arun", "Bala", "Charan"],    "Age": [20, 21, 22],    "Marks": [85, 90, 88] } 
+# Convert dictionary into DataFrame df = pd.DataFrame(student) print("\nStudent DataFrame") print(df) 
+# Display only the Name column print("\nStudent Names") print(df["Name"]) 
+# Add a new column df["Grade"] = ["A", "A+", "A"] print("\nUpdated DataFrame") print(df)
