@@ -78,3 +78,44 @@ plt.title("Daily Sales and 7-Day Moving Average") plt.xlabel("Date") plt.ylabel(
 # Monthly Sales monthly_sales = data["Sales"].resample("ME").sum() print("\nMonthly Sales:") print(monthly_sales) 
 # Monthly Sales Visualization plt.figure(figsize=(10, 5)) plt.plot(monthly_sales.index, monthly_sales.values, marker="o") 
 plt.title("Monthly Sales Trend") plt.xlabel("Month") plt.ylabel("Total Sales (₹)") plt.grid(True) plt.show()
+
+Experiment 9: Geographical Data Visualization Program: 
+import pandas as pd import folium data = pd.read_csv("india_cities.csv") print("First Five Records:") print(data.head()) 
+india_map = folium.Map(location=[22.5, 78.9], zoom_start=5) for _, row in data.iterrows():    
+popup_text = (        f"City: {row['City']}<br>"        f"State: {row['State']}<br>"        f"Population: {row['Population']:,}"    )    
+folium.Marker(        location=[row["Latitude"], row["Longitude"]],        popup=popup_text,        tooltip=row["City"]    ).add_to(india_map) india_map 
+# Circle Marker Version population_map = folium.Map(location=[22.5, 78.9], zoom_start=5) 
+for _, row in data.iterrows():
+folium.CircleMarker(location=[row["Latitude"], row["Longitude"]],radius=max(4, row["Population"]/1000000),popup=row["City"],tooltip=row["City"],fill=True).add_to(population_map) population_map
+
+Experiment 10: Cartographic Visualization Program:
+import pandas as pd import folium state_data = pd.read_csv("state_sales.csv") print(state_data.head()) 
+geojson_file = "india_states.geojson" india_map = folium.Map(location=[22.5, 78.9], zoom_start=5) 
+folium.Choropleth(geo_data=geojson_file,data=state_data,columns=["State", "Sales"],key_on="feature.properties.ST_NM",fill_opacity=0.7,line_opacity=0.2,legend_name="State-wise Sales" ).add_to(india_map) 
+folium.LayerControl().add_to(india_map) india_map
+
+Experiment 11: EDA on Wine Quality Dataset Program: 
+import pandas as pd import matplotlib.pyplot as plt import seaborn as sns data = pd.read_csv("winequality-red.csv", sep=";") 
+print("First Five Records:") print(data.head()) print("\nDataset Shape:") print(data.shape) print("\nData Types:") print(data.dtypes) print("\nMissing Values:") print(data.isnull().sum()) 
+print("\nDescriptive Statistics:") print(data.describe()) 
+# Distribution of Wine Quality plt.figure(figsize=(8, 5)) sns.countplot(data=data, x="quality") 
+plt.title("Distribution of Wine Quality") plt.xlabel("Quality Score") plt.ylabel("Number of Wines") plt.show() 
+# Alcohol Distribution plt.figure(figsize=(8, 5)) plt.hist(data["alcohol"], bins=15, edgecolor="black") 
+plt.title("Distribution of Alcohol Content") plt.xlabel("Alcohol (%)") plt.ylabel("Frequency") plt.show() 
+# Box Plot of Alcohol by Quality plt.figure(figsize=(8, 5)) sns.boxplot(data=data, x="quality", y="alcohol") 
+plt.title("Alcohol Content by Wine Quality") plt.xlabel("Quality") plt.ylabel("Alcohol (%)") plt.show() 
+# Volatile Acidity by Quality plt.figure(figsize=(8, 5)) sns.boxplot(data=data, x="quality", y="volatile acidity") 
+plt.title("Volatile Acidity by Wine Quality") plt.xlabel("Quality") plt.ylabel("Volatile Acidity") plt.show()
+
+Experiment 12: Correlation Heatmap and Multivariate Analysis Program: 
+import pandas as pd import matplotlib.pyplot as plt import seaborn as sns data = pd.read_csv("winequality-red.csv", sep=";") 
+correlation_matrix = data.corr(numeric_only=True) print("Correlation Matrix:") print(correlation_matrix) 
+# Correlation Heatmap plt.figure(figsize=(12, 8)) sns.heatmap(correlation_matrix, annot=True, fmt=".2f", linewidths=0.5) 
+plt.title("Correlation Heatmap of Wine Quality Dataset") plt.show() 
+# Pair Plot selected_columns = ["alcohol", "volatile acidity", "citric acid", "sulphates", "quality"] sns.pairplot(data[selected_columns]) plt.show() 
+# Alcohol vs Quality plt.figure(figsize=(8, 5)) sns.scatterplot(data=data, x="alcohol", y="quality") 
+plt.title("Alcohol vs Wine Quality") plt.xlabel("Alcohol (%)") plt.ylabel("Quality") plt.show() 
+# Alcohol vs Quality with Regression Line plt.figure(figsize=(8, 5)) sns.regplot(data=data, x="alcohol", y="quality") 
+plt.title("Relationship Between Alcohol and Quality") plt.xlabel("Alcohol (%)") plt.ylabel("Quality") plt.show()  
+# Sulphates vs Quality plt.figure(figsize=(8, 5)) sns.scatterplot(data=data, x="sulphates", y="quality")
+plt.title("Sulphates vs Wine Quality") plt.xlabel("Sulphates") plt.ylabel("Quality") plt.show()
