@@ -1,0 +1,16 @@
+ Experiment 1: Installation and Setup of Data Analysis Tools Program:
+# Import NumPy Library import numpy as np 
+# Import Pandas Library import pandas as pd 
+# Import Matplotlib library import matplotlib.pyplot as plt 
+# Import Seaborn library import seaborn as sns 
+# Import Folium library import folium 
+# Display success message print("All required libraries are installed successfully.")
+
+Experiment 2: Exploratory Data Analysis on a Real-World Dataset Program: 
+# Import the Pandas library import pandas as pd 
+# Load the Titanic dataset data = pd.read_csv("titanic.csv") 
+# Display the first five rows of the dataset print("First Five Records") print(data.head()) 
+# Display basic information about the dataset print("\nDataset Information") print(data.info()) 
+# Display the total number of missing values in each column print("\nMissing Values") print(data.isnull().sum()) 
+# Display summary statistics of numerical columns print("\nSummary Statistics") print(data.describe()) 
+# Display the names of all columns print("\nColumn Names") print(data.columns)
