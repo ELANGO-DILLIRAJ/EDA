@@ -24,3 +24,9 @@ Experiment 3: Working with NumPy Arrays and Pandas DataFrames Program:
 # Convert dictionary into DataFrame df = pd.DataFrame(student) print("\nStudent DataFrame") print(df) 
 # Display only the Name column print("\nStudent Names") print(df["Name"]) 
 # Add a new column df["Grade"] = ["A", "A+", "A"] print("\nUpdated DataFrame") print(df)
+
+Experiment 4: Data Cleaning and Preprocessing Program: 
+# Import the Pandas Library import pandas as pd 
+# Load the Titanic dataset data = pd.read_csv("titanic.csv") print("Original Dataset") print(data.head()) print("\nMissing Values Before Cleaning") print(data.isnull().sum()) 
+# Fill missing values in the Age column with the mean age data["Age"] = data["Age"].fillna(data["Age"].mean()) 
+# Remove duplicate rows data = data.drop_duplicates() print("\nMissing Values After Cleaning") print(data.isnull().sum()) print("\nCleaned Dataset") print(data.head())
