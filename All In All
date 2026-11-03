@@ -53,3 +53,15 @@ Experiment 6: Bivariate Data Analysis Program:
 import pandas as pd import matplotlib.pyplot as plt data = pd.read_csv("notebooks/student_performance.csv") 
 print(data) plt.figure(figsize=(6, 4)) plt.scatter(data["Hours_Studied"], data["Marks"]) 
 plt.title("Hours Studied vs Marks") plt.xlabel("Hours Studied") plt.ylabel("Marks") plt.show()
+
+Experiment 7: Aggregation, Grouping, and Pivot Tables Program: 
+import pandas as pd data = pd.read_csv("employee_dataset_100_records.csv") 
+print("Employee Dataset:") print(data.head()) 
+department_group = data.groupby("Department") average_salary = department_group["Salary"].mean() 
+print("\nAverage Salary by Department:") print(average_salary) total_salary = department_group["Salary"].sum() 
+print("\nTotal Salary by Department:") print(total_salary) employee_count = department_group["Employee_ID"].count() 
+print("\nNumber of Employees by Department:") print(employee_count) average_performance = department_group["Performance_Score"].mean() 
+print("\nAverage Performance by Department:") print(average_performance) 
+summary = department_group["Salary"].agg(["count", "mean", "min", "max", "sum"]) print("\nSalary Summary:") print(summary) 
+pivot_table = pd.pivot_table(    data,    values="Salary",    index="Department",    columns="Gender",    aggfunc="mean" ) 
+print("\nAverage Salary by Department and Gender:") print(pivot_table)
